@@ -26,7 +26,7 @@ def divisibles(n)
   end
 end
 
-divisibles(30)
+# divisibles(30)
 
 # 2. Given a Linked List:
 
@@ -46,19 +46,20 @@ class LinkedList
     runner.next = node
   end
 
-  def delete(node)
-    runner = @head
-    if runner == node
-        @head = runner.next
-    else
-        while runner.next != node && runner.next != nil
-            runner = runner.next
-        end
-        if runner.next == node
-            runner.next = runner.next.next
-        end
-    end
+  # def delete(node)
+  #   runner = @head
+  #   if runner == node
+  #     @head = runner.next
+  #   else
+  #     while runner.next != node && runner.next != nil
+  #       runner = runner.next
+  #     end
+  #     if runner.next == node
+  #       runner.next = runner.next.next
+  #     end
+  #   end
 
+  # end
 end
 
 # With each Node formatted as such:
@@ -68,11 +69,23 @@ class Node
   attr_accessor :value, :next
 
   def initialize(value)
-      @value = value
+    @value = value
   end
 
 end
 
+
+a = Node.new(1)
+b = Node.new(2)
+c = Node.new(3)
+d = Node.new(4)
+e = Node.new(5)
+f = Node.new(6)
+a.next = b
+b.next = c
+c.next = d
+d.next = e
+e.next = f
 # Task:Delete a node from the singly linked list given only a variable pointing to that node.
 
 # Please see the method that I wrote above as part of the LinkedList class to delete a node
@@ -91,20 +104,20 @@ end
 
 a = {
   # (x,y) originating in the top-left
-  'x': 2,
-  'y': 6,
+  'x': 0,
+  'y': 1,
   # width and height
-  'w': 10,
-  'h': 4,
+  'w': 2,
+  'h': 1,
 }
 
 b = {
   # (x,y) originating in the top-left
   'x': 1,
-  'y': 5,
+  'y': 0,
   # width and height
-  'w': 10,
-  'h': 4,
+  'w': 2,
+  'h': 2,
 }
 
 def findIntersect(a, b)
@@ -113,14 +126,14 @@ def findIntersect(a, b)
     topRect = a[:y] > b[:y] ? a : b
     bottomRect = topRect == a ? b : a
     wTemp = leftRect[:x] + leftRect[:w] - rightRect[:x]
-    hTemp = bottomRect[:y] - (topRect[:y] - topRect[:h])
+    hTemp = bottomRect[:y] + bottomRect[:h] - topRect[:y]
     inter = {
             x: rightRect[:x],
-            y: bottomRect[:y],
+            y: topRect[:y],
             w: wTemp < rightRect[:w] ? wTemp : rightRect[:w],
-            h: hTemp < bottomRect[:h] ? hTemp : bottomRect[:h]
+            h: hTemp < topRect[:h] ? hTemp : topRect[:h]
             }
-    inter[:w] <= 0 || inter[:h] <= 0 ? "The rectangles don't intersect" : inter
+    inter[:w] <= 0 || inter[:h] <= 0 ? "They don't intersect" : inter
 end
-
+# I got confused about the y axis direction
 findIntersect(a, b)
